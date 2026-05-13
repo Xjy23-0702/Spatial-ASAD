@@ -1,0 +1,71 @@
+import torch
+import config as cfg
+from torch.utils.data import Dataset
+import numpy as np
+
+class AADdataset_1point(Dataset):
+    def __init__(self, eeg, label):
+        self.eeg = eeg
+        self.label = label
+
+    def __len__(self):
+        return self.eeg.shape[0]*self.eeg.shape[1]
+
+    def __getitem__(self, index):
+        x = self.eeg[int(index/self.eeg.shape[1])][index%self.eeg.shape[1]]
+        y = self.label[int(index/self.eeg.shape[1])][index%self.eeg.shape[1]]
+        x = torch.tensor(x, dtype=torch.float32)
+        y = torch.tensor(y, dtype=torch.long)
+        return x, y
+
+
+# winlen must be the gcd of the 128*60, in which 128 means 1s window_len
+class AADdataset_1second(Dataset):
+    def __init__(self, eeg, label):
+        self.eeg = eeg
+        self.label = label
+
+    def __len__(self):
+        return self.eeg.shape[0]
+
+    def __getitem__(self, index):
+        x = self.eeg[index]  # (window_size, channels)
+        # 获取窗口内的标签（假设同一窗口内标签一致）
+        y = self.label[index]  # 应该是 (window_size,) 或标量
+        # 如果y是数组，取众数或第一个值
+        if isinstance(y, np.ndarray) and len(y.shape) > 0:
+            y = y[0]  # 或者使用 mode
+        x = torch.tensor(x, dtype=torch.float32)
+        y = torch.tensor(y, dtype=torch.long)
+        return x, y
+
+def sliding_window(data, window_size, overlap):#train里面有7个tr的(time,cha),因此比test多一个维度为0的7，也就是num_segments
+    num_segments, segment_length, *other_dims = data.shape
+    step = window_size - overlap
+    num_windows = (segment_length - window_size) // step + 1
+
+    windows = []
+    for i in range(num_segments):
+        for start in range(0, segment_length - window_size + 1, step):
+            window = data[i, start:start + window_size]
+            windows.append(window)
+    windows = np.array(windows)
+
+    # return windows.reshape(-1, window_size, *other_dims)
+    return windows
+
+
+def sliding_window2(data, window_size, overlap):#overlap 表示相邻窗口之间的重叠长度
+    segment_length, *other_dims = data.shape
+    step = window_size - overlap#step 是窗口每次滑动的步长
+    num_windows = (segment_length - window_size) // step + 1
+
+    windows = []
+    for start in range(0, segment_length - window_size + 1, step):
+        window = data[start:start + window_size]
+        windows.append(window)
+    windows = np.array(windows)
+
+    # return windows.reshape(-1, window_size, *other_dims)
+    return windows
+
