@@ -1,10 +1,8 @@
 import torch
 
 # models
-process_data_dir = '/disk1/jyxu/DaChuang'
-result_dir='/disk1/jyxu/DaChuang/Improvement/Model_imp/CSP_projection_onto_CNN'
-pretrain_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_imp/CSP_projection_onto_CNN/pretrain_model'
-finetune_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_imp/CSP_projection_onto_CNN/finetune_model'
+pretrain_model_dir='./pretrain_model'
+finetune_model_dir='./finetune_model'
 dataset_name = 'KUL3_1D.mat'
 
 device_ids = 5
