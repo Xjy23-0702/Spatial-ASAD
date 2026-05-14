@@ -3,15 +3,14 @@ import torch
 # models
 model_names = ['CNN_CSP_Riemannian', 'CNN_CovarianceEnhanced']
 model_name = model_names[1]
-process_data_dir = '/disk1/jyxu/DaChuang/REFER_CODE'
 if model_name == 'CNN_CSP_Riemannian':
-    result_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CSP_Riemannian'
-    pretrain_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CSP_Riemannian/pretrain_model'
-    finetune_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CSP_Riemannian/finetune_model'
+    result_dir='./CNN_CSP_Riemannian'
+    pretrain_model_dir='./CNN_CSP_Riemannian/pretrain_model'
+    finetune_model_dir='./CNN_CSP_Riemannian/finetune_model'
 elif model_name == 'CNN_CovarianceEnhanced':
-    result_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CovarianceEnhanced'
-    pretrain_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CovarianceEnhanced/pretrain_model'
-    finetune_model_dir='/disk1/jyxu/DaChuang/Improvement/Model_and_Domain_imp/Differentiable_CSP_Riemannian_copy/CNN_CovarianceEnhanced/finetune_model'
+    result_dir='./CNN_CovarianceEnhanced'
+    pretrain_model_dir='./CNN_CovarianceEnhanced/pretrain_model'
+    finetune_model_dir='./CNN_CovarianceEnhanced/finetune_model'
 dataset_name = 'KUL3_1D.mat'
 
 device_ids = 5
