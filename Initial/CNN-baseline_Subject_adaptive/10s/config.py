@@ -3,10 +3,8 @@ import torch
 # models
 model_names = ['CNN_baseline','CNN_2D','DenseNet_37']
 model_name = model_names[0] # you could change the code to other models by only changing the number
-process_data_dir = '/disk1/jyxu/DaChuang/REFER_CODE'
-result_dir='/disk1/jyxu/DaChuang/REFER_CODE/CNN-baseline_Subject_adaptive/10s'
-pretrain_model_dir='/disk1/jyxu/DaChuang/REFER_CODE/CNN-baseline_Subject_adaptive/10s/pretrain_model'
-finetune_model_dir='/disk1/jyxu/DaChuang/REFER_CODE/CNN-baseline_Subject_adaptive/10s/finetune_model'
+pretrain_model_dir='./pretrain_model'
+finetune_model_dir='./finetune_model'
 if model_name == 'CNN_baseline':
     dataset_name = 'KUL3_1D.mat'
 else:
