@@ -3,9 +3,7 @@ import torch
 # models
 model_names = ['CNN_baseline','CNN_2D','DenseNet_37']
 model_name = model_names[0] # you could change the code to other models by only changing the number
-process_data_dir = '/disk1/jyxu/DaChuang/REFER_CODE'
-result_dir='/disk1/jyxu/DaChuang/REFER_CODE/CNN-baseline_within_trial/10s'
-model_dir='/disk1/jyxu/DaChuang/REFER_CODE/CNN-baseline_within_trial/10s/model'
+model_dir='./model'
 if model_name == 'CNN_baseline':
     dataset_name = 'KUL3_1D.mat'
 else:
